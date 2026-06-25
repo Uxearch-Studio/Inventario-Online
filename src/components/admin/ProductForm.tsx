@@ -4,6 +4,7 @@ import { useState, useRef, ChangeEvent, FormEvent } from 'react';
 import Image from 'next/image';
 import { Camera, X } from 'lucide-react';
 import type { Product, ProductFormData } from '@/types/product';
+import { CATEGORIES } from '@/types/product';
 
 interface Props {
   initial?: Product;
@@ -18,6 +19,7 @@ export default function ProductForm({ initial, onSubmit, submitLabel }: Props) {
     description: initial?.description ?? '',
     imageUrl: initial?.imageUrl ?? '',
     status: initial?.status ?? 'active',
+    category: initial?.category ?? undefined,
   });
   const [preview, setPreview] = useState<string>(initial?.imageUrl ?? '');
   const [loading, setLoading] = useState(false);
@@ -120,6 +122,27 @@ export default function ProductForm({ initial, onSubmit, submitLabel }: Props) {
           value={form.description}
           onChange={e => setForm(f => ({ ...f, description: e.target.value }))}
         />
+      </div>
+
+      {/* categoría */}
+      <div>
+        <label className="block text-sm font-medium text-black mb-2">Categoría</label>
+        <div className="flex flex-wrap gap-2">
+          {CATEGORIES.map(cat => (
+            <button
+              key={cat}
+              type="button"
+              onClick={() => setForm(f => ({ ...f, category: f.category === cat ? undefined : cat }))}
+              className={`px-4 py-2 rounded-full text-xs font-semibold border transition-colors ${
+                form.category === cat
+                  ? 'bg-green text-white border-green'
+                  : 'bg-white text-gray-600 border-gray-200 hover:border-green/50'
+              }`}
+            >
+              {cat}
+            </button>
+          ))}
+        </div>
       </div>
 
       {/* estado — solo en edición */}
