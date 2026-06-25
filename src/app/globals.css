@@ -2,20 +2,33 @@
 
 @theme {
   --color-cream: #DDCDAE;
+  --color-cream-light: #F0EBE2;
   --color-green: #525C44;
   --color-dark-green: #194970;
   --color-gold: #CEBA6F;
   --color-gold-light: #f0e8c4;
-  --color-surface: #f8f6f2;
-}
-
-body {
-  background-color: var(--color-surface);
-  color: #000000;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  --color-surface: #FAF9F6;
+  --font-serif: var(--font-serif);
+  --font-sans: var(--font-sans);
 }
 
 * {
   box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
 }
+
+body {
+  background-color: var(--color-surface);
+  color: #1c1c1c;
+  font-family: var(--font-sans), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.font-serif {
+  font-family: var(--font-serif), 'Georgia', serif;
+}
+
+/* scrollbar hidden utility */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }

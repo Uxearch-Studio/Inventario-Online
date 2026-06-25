@@ -44,61 +44,52 @@ export default function ShopPage() {
       setLoading(false);
       return;
     }
-
     const q = query(collection(db, 'products'), orderBy('createdAt', 'desc'));
-    const unsub = onSnapshot(
-      q,
+    const unsub = onSnapshot(q,
       snap => {
-        const docs = snap.docs.map(d => toProduct(d.id, d.data() as Record<string, unknown>));
-        setAllProducts(docs.filter(p => p.status === 'active'));
+        setAllProducts(snap.docs.map(d => toProduct(d.id, d.data() as Record<string, unknown>)).filter(p => p.status === 'active'));
         setLoading(false);
       },
-      () => {
-        setAllProducts(mockProducts);
-        setLoading(false);
-      }
+      () => { setAllProducts(mockProducts); setLoading(false); }
     );
     return () => unsub();
   }, []);
 
-  const filtered = useMemo(() => {
-    return allProducts.filter(p => {
-      const matchCat = activeFilter === ALL || p.category === activeFilter;
-      const q = search.toLowerCase();
-      const matchSearch = !q || p.name.toLowerCase().includes(q) || p.description.toLowerCase().includes(q);
-      return matchCat && matchSearch;
-    });
-  }, [allProducts, search, activeFilter]);
+  const filtered = useMemo(() => allProducts.filter(p => {
+    const matchCat = activeFilter === ALL || p.category === activeFilter;
+    const q = search.toLowerCase();
+    return matchCat && (!q || p.name.toLowerCase().includes(q) || p.description.toLowerCase().includes(q));
+  }), [allProducts, search, activeFilter]);
 
   return (
     <div>
-      {/* buscador */}
-      <div className="relative mb-4">
-        <Search size={17} className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" />
+      {/* buscador minimal */}
+      <div className="relative mb-6">
+        <Search size={15} className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-300" />
         <input
           type="search"
           placeholder="Buscar productos..."
           value={search}
           onChange={e => setSearch(e.target.value)}
-          className="w-full bg-white border border-cream rounded-2xl pl-10 pr-10 py-3 text-sm text-black placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green/30 focus:border-green"
+          className="w-full bg-white border border-cream-light rounded-full pl-10 pr-10 py-2.5 text-sm text-[#1c1c1c] placeholder-gray-300 focus:outline-none focus:border-green/40 transition-colors"
         />
         {search && (
-          <button onClick={() => setSearch('')} className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400">
-            <X size={16} />
+          <button onClick={() => setSearch('')} className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-300">
+            <X size={14} />
           </button>
         )}
       </div>
 
-      {/* categorias */}
-      <div className="flex gap-2 overflow-x-auto pb-3 mb-5 -mx-4 px-4" style={{ scrollbarWidth: 'none' }}>
+      {/* categorías — estilo texto con indicador */}
+      <div className="flex gap-0 overflow-x-auto no-scrollbar -mx-4 px-4 mb-7">
         {([ALL, ...CATEGORIES] as Filter[]).map(cat => (
           <button
             key={cat}
             onClick={() => setActiveFilter(cat)}
-            className={`flex-shrink-0 px-4 py-2 rounded-full text-xs font-semibold transition-colors border ${
+            className={`flex-shrink-0 px-3 py-2 text-[11px] uppercase tracking-wider font-medium transition-all border-b-2 ${
               activeFilter === cat
-                ? 'bg-green text-white border-green'
-                : 'bg-white text-gray-600 border-cream hover:border-green/40'
+                ? 'text-green border-green'
+                : 'text-gray-300 border-transparent hover:text-gray-400'
             }`}
           >
             {cat}
@@ -108,19 +99,26 @@ export default function ShopPage() {
 
       {/* loading */}
       {loading && (
-        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
+        <div className="grid grid-cols-2 gap-4 sm:grid-cols-3">
           {[1, 2, 3, 4].map(i => (
-            <div key={i} className="bg-cream rounded-2xl aspect-[3/4] animate-pulse" />
+            <div key={i} className="rounded-2xl overflow-hidden">
+              <div className="bg-cream-light aspect-[3/4] animate-pulse rounded-2xl" />
+              <div className="mt-3 space-y-2">
+                <div className="h-3 w-1/2 bg-cream-light rounded animate-pulse" />
+                <div className="h-4 w-3/4 bg-cream-light rounded animate-pulse" />
+                <div className="h-3 w-1/3 bg-cream-light rounded animate-pulse" />
+              </div>
+            </div>
           ))}
         </div>
       )}
 
-      {/* sin resultados */}
+      {/* vacío */}
       {!loading && filtered.length === 0 && (
-        <div className="flex flex-col items-center justify-center py-20 text-center">
-          <p className="text-gray-500 font-medium">No encontramos productos</p>
+        <div className="flex flex-col items-center justify-center py-24 text-center">
+          <p className="font-serif text-2xl font-light text-gray-300 italic mb-2">Sin resultados</p>
           {search && (
-            <button onClick={() => setSearch('')} className="mt-3 text-sm text-green font-medium">
+            <button onClick={() => setSearch('')} className="text-xs uppercase tracking-widest text-green mt-3">
               Limpiar búsqueda
             </button>
           )}
@@ -130,8 +128,10 @@ export default function ShopPage() {
       {/* grid */}
       {!loading && filtered.length > 0 && (
         <>
-          <p className="text-xs text-gray-400 mb-3">{filtered.length} producto{filtered.length !== 1 ? 's' : ''}</p>
-          <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
+          <p className="text-[11px] uppercase tracking-widest text-gray-300 mb-5">
+            {filtered.length} {filtered.length === 1 ? 'producto' : 'productos'}
+          </p>
+          <div className="grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3">
             {filtered.map(p => (
               <StoreProductCard key={p.id} product={p} />
             ))}
