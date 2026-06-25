@@ -1,6 +1,10 @@
+'use client';
+
 import Image from 'next/image';
 import Link from 'next/link';
+import { Plus, Minus } from 'lucide-react';
 import type { Product } from '@/types/product';
+import { useCart } from '@/context/CartContext';
 
 const categoryColors: Record<string, string> = {
   'Mundo Mente': 'bg-blue-50 text-blue-600',
@@ -11,6 +15,9 @@ const categoryColors: Record<string, string> = {
 };
 
 export default function StoreProductCard({ product }: { product: Product }) {
+  const { items, addItem, updateQty } = useCart();
+  const cartItem = items.find(i => i.id === product.id);
+
   return (
     <Link href={`/shop/${product.id}`} className="group block">
       <div className="bg-white rounded-2xl overflow-hidden shadow-sm border border-cream active:scale-[0.98] transition-transform">
@@ -36,6 +43,37 @@ export default function StoreProductCard({ product }: { product: Product }) {
               <span className="text-xs text-green/50 font-medium">Ana Holística</span>
             </div>
           )}
+
+          {/* controles de carrito sobre la imagen */}
+          <div
+            className="absolute bottom-2 right-2"
+            onClick={e => e.preventDefault()}
+          >
+            {cartItem ? (
+              <div className="flex items-center gap-1 bg-white/95 backdrop-blur-sm rounded-full shadow-md px-1.5 py-1">
+                <button
+                  onClick={() => updateQty(product.id, cartItem.quantity - 1)}
+                  className="w-6 h-6 rounded-full bg-green/10 flex items-center justify-center text-green active:scale-90 transition-transform"
+                >
+                  <Minus size={11} />
+                </button>
+                <span className="text-xs font-bold text-black w-5 text-center">{cartItem.quantity}</span>
+                <button
+                  onClick={() => addItem(product)}
+                  className="w-6 h-6 rounded-full bg-green flex items-center justify-center text-white active:scale-90 transition-transform"
+                >
+                  <Plus size={11} />
+                </button>
+              </div>
+            ) : (
+              <button
+                onClick={() => addItem(product)}
+                className="w-9 h-9 bg-gold rounded-full shadow-md flex items-center justify-center text-white active:scale-90 transition-transform hover:bg-gold/90"
+              >
+                <Plus size={18} />
+              </button>
+            )}
+          </div>
         </div>
 
         {/* info */}
