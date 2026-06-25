@@ -1,4 +1,13 @@
 export type ProductStatus = 'active' | 'archived' | 'unavailable' | 'low_stock';
+export type ProductCategory = 'Mundo Mente' | 'Mundo Cuerpo' | 'Mundo Energía' | 'Mundo Naturaleza' | 'Mundo Alma';
+
+export const CATEGORIES: ProductCategory[] = [
+  'Mundo Mente',
+  'Mundo Cuerpo',
+  'Mundo Energía',
+  'Mundo Naturaleza',
+  'Mundo Alma',
+];
 
 export interface Product {
   id: string;
@@ -6,6 +15,7 @@ export interface Product {
   price: number;
   description: string;
   imageUrl: string;
+  category?: ProductCategory;
   unitsSold: number;
   status: ProductStatus;
   createdAt: Date;
@@ -19,6 +29,7 @@ export interface ProductFormData {
   imageFile?: File;
   imageUrl?: string;
   status: ProductStatus;
+  category?: ProductCategory;
 }
 
 export const STATUS_LABELS: Record<ProductStatus, string> = {
