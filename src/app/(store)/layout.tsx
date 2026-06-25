@@ -20,7 +20,7 @@ function StoreShell({ children }: { children: React.ReactNode }) {
   const shopActive = pathname === '/shop' || pathname.startsWith('/shop/');
 
   return (
-    <div className="min-h-screen flex flex-col bg-white">
+    <div className="min-h-screen flex flex-col bg-white overflow-x-hidden">
 
       {/* Header */}
       <header className="sticky top-0 z-20 bg-white/95 backdrop-blur-md border-b border-cream-light">

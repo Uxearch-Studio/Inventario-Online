@@ -162,6 +162,7 @@ export default function SobreMiPage() {
         {/* panel con swipe */}
         <div
           className={`relative rounded-2xl overflow-hidden bg-gradient-to-br ${selected.bg} transition-opacity duration-150 ${fading ? 'opacity-0' : 'opacity-100'}`}
+          style={{ touchAction: 'pan-y' }}
           onTouchStart={handleTouchStart}
           onTouchEnd={handleTouchEnd}
         >
