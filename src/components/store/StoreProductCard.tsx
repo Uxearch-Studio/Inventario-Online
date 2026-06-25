@@ -15,7 +15,7 @@ export default function StoreProductCard({ product }: { product: Product }) {
 
   return (
     <div className="flex flex-col">
-      {/* imagen + overlay de descripción */}
+      {/* imagen */}
       <div className="relative w-full aspect-[3/4] rounded-2xl overflow-hidden bg-cream-light mb-3">
 
         {/* imagen o placeholder */}
@@ -40,17 +40,45 @@ export default function StoreProductCard({ product }: { product: Product }) {
           </p>
         </div>
 
-        {/* botón info */}
+        {/* info — esquina inferior izquierda */}
         <button
           onClick={e => { e.preventDefault(); setShowDesc(v => !v); }}
-          className={`absolute bottom-2.5 right-2.5 w-7 h-7 rounded-full flex items-center justify-center transition-all duration-200 ${
+          className={`absolute bottom-2.5 left-2.5 w-7 h-7 rounded-full flex items-center justify-center transition-all duration-200 ${
             showDesc
               ? 'bg-[#2c2c2c] text-white'
-              : 'bg-white/80 backdrop-blur-sm text-[#888] hover:text-[#2c2c2c]'
+              : 'bg-white/80 backdrop-blur-sm text-[#888]'
           }`}
         >
           {showDesc ? <X size={12} strokeWidth={2} /> : <Info size={12} strokeWidth={1.8} />}
         </button>
+
+        {/* carrito — esquina inferior derecha */}
+        {cartItem ? (
+          <div className="absolute bottom-2.5 right-2.5 flex items-center bg-white/90 backdrop-blur-sm rounded-full px-2 py-1 shadow-sm gap-1">
+            <button
+              onClick={e => { e.preventDefault(); updateQty(product.id, cartItem.quantity - 1); }}
+              className="w-5 h-5 flex items-center justify-center text-[#555] active:text-green transition-colors"
+            >
+              <Minus size={10} strokeWidth={2.5} />
+            </button>
+            <span className="text-[11px] font-semibold text-[#2c2c2c] min-w-[12px] text-center">
+              {cartItem.quantity}
+            </span>
+            <button
+              onClick={e => { e.preventDefault(); addItem(product); }}
+              className="w-5 h-5 flex items-center justify-center text-green active:opacity-60 transition-opacity"
+            >
+              <Plus size={10} strokeWidth={2.5} />
+            </button>
+          </div>
+        ) : (
+          <button
+            onClick={e => { e.preventDefault(); addItem(product); }}
+            className="absolute bottom-2.5 right-2.5 w-7 h-7 rounded-full flex items-center justify-center bg-green text-white shadow-sm active:opacity-70 transition-opacity"
+          >
+            <Plus size={13} strokeWidth={2} />
+          </button>
+        )}
       </div>
 
       {/* info texto */}
@@ -66,38 +94,9 @@ export default function StoreProductCard({ product }: { product: Product }) {
           </h3>
         </Link>
 
-        <span className="text-[14px] text-green font-light mt-1">
+        <span className="text-[14px] text-green font-light mt-0.5">
           $ {product.price.toLocaleString('es-CO')}
         </span>
-
-        {/* carrito */}
-        {cartItem ? (
-          <div className="flex items-center justify-between mt-2 border border-cream rounded-full px-3 py-1.5">
-            <button
-              onClick={() => updateQty(product.id, cartItem.quantity - 1)}
-              className="text-gray-400 active:text-green transition-colors p-0.5"
-            >
-              <Minus size={12} />
-            </button>
-            <span className="text-[12px] font-medium text-[#2c2c2c] min-w-[16px] text-center">
-              {cartItem.quantity}
-            </span>
-            <button
-              onClick={() => addItem(product)}
-              className="text-green active:opacity-60 transition-opacity p-0.5"
-            >
-              <Plus size={12} />
-            </button>
-          </div>
-        ) : (
-          <button
-            onClick={() => addItem(product)}
-            className="mt-2 w-full flex items-center justify-center gap-1.5 border border-cream-light rounded-full py-1.5 text-[11px] uppercase tracking-wider text-gray-400 hover:border-green hover:text-green transition-colors active:opacity-60"
-          >
-            <Plus size={10} strokeWidth={2} />
-            Agregar
-          </button>
-        )}
       </div>
     </div>
   );
