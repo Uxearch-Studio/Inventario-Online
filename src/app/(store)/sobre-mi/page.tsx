@@ -138,22 +138,22 @@ export default function SobreMiPage() {
           Nuestros mundos
         </p>
 
-        {/* selector — pills con scroll horizontal */}
-        <div className="flex gap-2 overflow-x-auto no-scrollbar -mx-4 px-4 mb-6">
+        {/* selector — tabs full-width, no scroll */}
+        <div className="flex border-b border-[#e8e2da] mb-6">
           {mundosData.map(m => {
             const active = selected.key === m.key;
             return (
               <button
                 key={m.key}
                 onClick={() => pickMundo(m)}
-                className={`flex-shrink-0 flex items-center gap-1.5 px-3.5 py-1.5 rounded-full border transition-all duration-200 active:scale-95 ${
+                className={`flex-1 flex flex-col items-center gap-1.5 pb-2.5 pt-1 transition-all duration-200 active:opacity-60 border-b-2 -mb-px ${
                   active
-                    ? 'bg-green text-white border-green shadow-sm'
-                    : 'text-[#6e6e62] border-[#d4cbbf] bg-white hover:border-green/40'
+                    ? 'text-green border-green'
+                    : 'text-[#8a8779] border-transparent'
                 }`}
               >
-                <m.icon size={11} strokeWidth={active ? 2 : 1.6} />
-                <span className="text-[10px] uppercase tracking-wider font-medium whitespace-nowrap">{m.name}</span>
+                <m.icon size={18} strokeWidth={active ? 2 : 1.5} />
+                <span className="text-[9px] uppercase tracking-wide font-medium leading-none">{m.name}</span>
               </button>
             );
           })}
