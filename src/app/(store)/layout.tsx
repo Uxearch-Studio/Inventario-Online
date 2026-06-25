@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Feather, Flower2, Sparkles, Leaf, ShoppingBag } from 'lucide-react';
+import { Feather, Flower2, Sparkles, Store, ShoppingBag } from 'lucide-react';
 import { CartProvider, useCart } from '@/context/CartContext';
 import CartButton from '@/components/store/CartButton';
 import CartDrawer from '@/components/store/CartDrawer';
@@ -65,32 +65,27 @@ function StoreShell({ children }: { children: React.ReactNode }) {
               <Link
                 key={item.href}
                 href={item.href}
-                className={`flex-1 flex flex-col items-center justify-center gap-1 transition-colors ${
+                className={`flex-1 relative flex flex-col items-center justify-center gap-1 transition-colors ${
                   active ? 'text-green' : 'text-[#6e6e62]'
                 }`}
               >
-                <item.icon size={19} strokeWidth={1.5} />
-                <span className="text-[10px] uppercase tracking-widest">{item.label}</span>
+                {active && <span className="absolute top-0 left-1/2 -translate-x-1/2 w-5 h-0.5 bg-green rounded-full" />}
+                <item.icon size={19} strokeWidth={active ? 2 : 1.5} />
+                <span className={`text-[10px] uppercase tracking-widest ${active ? 'font-medium' : ''}`}>{item.label}</span>
               </Link>
             );
           })}
 
-          {/* Shop tab con badge */}
+          {/* Shop tab */}
           <Link
             href="/shop"
-            className={`flex-1 flex flex-col items-center justify-center gap-1 transition-colors ${
+            className={`flex-1 relative flex flex-col items-center justify-center gap-1 transition-colors ${
               shopActive ? 'text-green' : 'text-[#6e6e62]'
             }`}
           >
-            <div className="relative">
-              <Leaf size={19} strokeWidth={1.5} />
-              <span className={`absolute -top-2 -right-2.5 min-w-[16px] h-4 px-0.5 rounded-full flex items-center justify-center text-[9px] font-semibold leading-none transition-colors ${
-                totalItems > 0 ? 'bg-gold text-white' : 'bg-gray-200 text-gray-400'
-              }`}>
-                {totalItems}
-              </span>
-            </div>
-            <span className="text-[10px] uppercase tracking-widest">Shop</span>
+            {shopActive && <span className="absolute top-0 left-1/2 -translate-x-1/2 w-5 h-0.5 bg-green rounded-full" />}
+            <Store size={19} strokeWidth={shopActive ? 2 : 1.5} />
+            <span className={`text-[10px] uppercase tracking-widest ${shopActive ? 'font-medium' : ''}`}>Shop</span>
           </Link>
         </div>
       </nav>
