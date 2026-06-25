@@ -16,12 +16,21 @@ export default function ProductosPage() {
   const router = useRouter();
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
   const [toDelete, setToDelete] = useState<Product | null>(null);
 
   useEffect(() => {
+    const timeout = setTimeout(() => {
+      setLoading(false);
+      setError('No se pudo conectar con la base de datos. Verifica las credenciales de Firebase en Vercel.');
+    }, 8000);
+
     getProducts()
       .then(setProducts)
-      .finally(() => setLoading(false));
+      .catch(() => setError('Error al cargar productos. Verifica la configuración de Firebase.'))
+      .finally(() => { clearTimeout(timeout); setLoading(false); });
+
+    return () => clearTimeout(timeout);
   }, []);
 
   async function handleStatusChange(id: string, status: ProductStatus) {
@@ -47,6 +56,18 @@ export default function ProductosPage() {
         {[1, 2, 3].map(i => (
           <div key={i} className="h-28 bg-cream rounded-2xl animate-pulse" />
         ))}
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="flex flex-col items-center justify-center py-20 text-center px-4">
+        <div className="w-14 h-14 rounded-full bg-red-50 flex items-center justify-center mb-4">
+          <Package size={28} className="text-red-400" />
+        </div>
+        <p className="font-semibold text-black mb-1">Sin conexión a Firebase</p>
+        <p className="text-sm text-gray-500 max-w-sm">{error}</p>
       </div>
     );
   }
