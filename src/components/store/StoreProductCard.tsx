@@ -34,7 +34,7 @@ export default function StoreProductCard({ product }: { product: Product }) {
             showDesc ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
           }`}
         >
-          <p className="font-serif text-[13px] italic font-light text-[#2c2c2c] leading-relaxed text-center line-clamp-6">
+          <p className="font-serif text-[15px] italic font-light text-[#2c2c2c] leading-relaxed text-center line-clamp-6">
             {product.description}
           </p>
         </div>
@@ -55,18 +55,18 @@ export default function StoreProductCard({ product }: { product: Product }) {
       {/* info texto */}
       <div className="flex flex-col gap-0.5 px-0.5">
         {product.category && (
-          <span className="text-[9px] uppercase tracking-[0.2em] text-gray-300 font-medium">
+          <span className="text-[10px] uppercase tracking-[0.2em] text-[#8a8779] font-medium">
             {product.category}
           </span>
         )}
 
         <Link href={`/shop/${product.id}`}>
-          <h3 className="text-[13px] font-medium text-[#2c2c2c] leading-snug line-clamp-2">
+          <h3 className="text-[14px] font-medium text-[#2c2c2c] leading-snug line-clamp-2">
             {product.name}
           </h3>
         </Link>
 
-        <span className="text-[13px] text-green font-light mt-1">
+        <span className="text-[14px] text-green font-light mt-1">
           $ {product.price.toLocaleString('es-CO')}
         </span>
 

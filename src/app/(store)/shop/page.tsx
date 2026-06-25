@@ -89,7 +89,7 @@ export default function ShopPage() {
             className={`flex-shrink-0 px-3 py-2 text-[11px] uppercase tracking-wider font-medium transition-all border-b-2 ${
               activeFilter === cat
                 ? 'text-green border-green'
-                : 'text-gray-300 border-transparent hover:text-gray-400'
+                : 'text-[#6e6e62] border-transparent hover:text-[#3a3a3a]'
             }`}
           >
             {cat}
@@ -116,7 +116,7 @@ export default function ShopPage() {
       {/* vacío */}
       {!loading && filtered.length === 0 && (
         <div className="flex flex-col items-center justify-center py-24 text-center">
-          <p className="font-serif text-2xl font-light text-gray-300 italic mb-2">Sin resultados</p>
+          <p className="font-serif text-2xl font-light text-[#8a8779] italic mb-2">Sin resultados</p>
           {search && (
             <button onClick={() => setSearch('')} className="text-xs uppercase tracking-widest text-green mt-3">
               Limpiar búsqueda
@@ -128,7 +128,7 @@ export default function ShopPage() {
       {/* grid */}
       {!loading && filtered.length > 0 && (
         <>
-          <p className="text-[11px] uppercase tracking-widest text-gray-300 mb-5">
+          <p className="text-[11px] uppercase tracking-widest text-[#8a8779] mb-5">
             {filtered.length} {filtered.length === 1 ? 'producto' : 'productos'}
           </p>
           <div className="grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3">

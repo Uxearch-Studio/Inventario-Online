@@ -30,10 +30,10 @@ export default function CartDrawer() {
           <div>
             <h2 className="font-serif text-2xl font-light italic text-[#2c2c2c]">Mi carrito</h2>
             {totalItems > 0 && (
-              <p className="text-[11px] uppercase tracking-widest text-gray-300 mt-0.5">{totalItems} {totalItems === 1 ? 'producto' : 'productos'}</p>
+              <p className="text-[11px] uppercase tracking-widest text-[#8a8779] mt-0.5">{totalItems} {totalItems === 1 ? 'producto' : 'productos'}</p>
             )}
           </div>
-          <button onClick={closeCart} className="p-2 text-gray-300 hover:text-[#2c2c2c] transition-colors">
+          <button onClick={closeCart} className="p-2 text-gray-400 hover:text-[#2c2c2c] transition-colors">
             <X size={18} strokeWidth={1.5} />
           </button>
         </div>
@@ -44,8 +44,8 @@ export default function CartDrawer() {
         <div className="flex-1 overflow-y-auto overscroll-contain px-6 py-5 space-y-6">
           {items.length === 0 ? (
             <div className="flex flex-col items-center justify-center py-16 text-center">
-              <p className="font-serif text-2xl font-light italic text-gray-200 mb-2">Vacío</p>
-              <p className="text-[11px] uppercase tracking-widest text-gray-300">Agrega productos para comenzar</p>
+              <p className="font-serif text-2xl font-light italic text-[#8a8779] mb-2">Vacío</p>
+              <p className="text-[11px] uppercase tracking-widest text-[#6e6e62]">Agrega productos para comenzar</p>
             </div>
           ) : (
             items.map(item => (
@@ -66,7 +66,7 @@ export default function CartDrawer() {
                     $ {(item.price * item.quantity).toLocaleString('es-CO')}
                   </p>
                   {item.quantity > 1 && (
-                    <p className="text-[11px] text-gray-300">$ {item.price.toLocaleString('es-CO')} c/u</p>
+                    <p className="text-[11px] text-[#8a8779]">$ {item.price.toLocaleString('es-CO')} c/u</p>
                   )}
 
                   {/* controles */}
@@ -95,7 +95,7 @@ export default function CartDrawer() {
           <div className="px-6 pb-8 sm:pb-6 pt-4 flex-shrink-0">
             <div className="h-px bg-cream-light mb-5" />
             <div className="flex items-baseline justify-between mb-5">
-              <span className="text-[11px] uppercase tracking-widest text-gray-300">Total</span>
+              <span className="text-[11px] uppercase tracking-widest text-[#6e6e62]">Total</span>
               <span className="font-serif text-2xl font-light text-[#2c2c2c]">
                 $ {totalPrice.toLocaleString('es-CO')}
               </span>

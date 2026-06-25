@@ -66,11 +66,11 @@ function StoreShell({ children }: { children: React.ReactNode }) {
                 key={item.href}
                 href={item.href}
                 className={`flex-1 flex flex-col items-center justify-center gap-1 transition-colors ${
-                  active ? 'text-green' : 'text-gray-300'
+                  active ? 'text-green' : 'text-[#6e6e62]'
                 }`}
               >
                 <item.icon size={19} strokeWidth={1.5} />
-                <span className="text-[9px] uppercase tracking-widest">{item.label}</span>
+                <span className="text-[10px] uppercase tracking-widest">{item.label}</span>
               </Link>
             );
           })}
@@ -79,7 +79,7 @@ function StoreShell({ children }: { children: React.ReactNode }) {
           <Link
             href="/shop"
             className={`flex-1 flex flex-col items-center justify-center gap-1 transition-colors ${
-              shopActive ? 'text-green' : 'text-gray-300'
+              shopActive ? 'text-green' : 'text-[#6e6e62]'
             }`}
           >
             <div className="relative">
@@ -90,7 +90,7 @@ function StoreShell({ children }: { children: React.ReactNode }) {
                 {totalItems}
               </span>
             </div>
-            <span className="text-[9px] uppercase tracking-widest">Shop</span>
+            <span className="text-[10px] uppercase tracking-widest">Shop</span>
           </Link>
         </div>
       </nav>
