@@ -115,12 +115,53 @@ export default function ShopPage() {
 
       {/* vacío */}
       {!loading && filtered.length === 0 && (
-        <div className="flex flex-col items-center justify-center py-24 text-center">
-          <p className="font-serif text-2xl font-light text-[#8a8779] italic mb-2">Sin resultados</p>
-          {search && (
-            <button onClick={() => setSearch('')} className="text-xs uppercase tracking-widest text-green mt-3">
-              Limpiar búsqueda
-            </button>
+        <div className="flex flex-col items-center justify-center py-14 text-center">
+          {/* ilustración loto */}
+          <svg viewBox="0 0 160 160" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-44 h-44 mb-7">
+            {/* pétalos exteriores — de atrás hacia adelante */}
+            <path d="M 0 0 C -13 -16 -11 -40 0 -52 C 11 -40 13 -16 0 0"
+              transform="translate(80 90) rotate(-72)" fill="#EDE5D8" stroke="#525C44" strokeWidth="0.65"/>
+            <path d="M 0 0 C -13 -16 -11 -40 0 -52 C 11 -40 13 -16 0 0"
+              transform="translate(80 90) rotate(72)" fill="#EDE5D8" stroke="#525C44" strokeWidth="0.65"/>
+            <path d="M 0 0 C -13 -16 -11 -40 0 -52 C 11 -40 13 -16 0 0"
+              transform="translate(80 90) rotate(-36)" fill="#E8DFD0" stroke="#525C44" strokeWidth="0.65"/>
+            <path d="M 0 0 C -13 -16 -11 -40 0 -52 C 11 -40 13 -16 0 0"
+              transform="translate(80 90) rotate(36)" fill="#E8DFD0" stroke="#525C44" strokeWidth="0.65"/>
+            <path d="M 0 0 C -13 -16 -11 -40 0 -52 C 11 -40 13 -16 0 0"
+              transform="translate(80 90) rotate(0)" fill="#F0EBE2" stroke="#525C44" strokeWidth="0.65"/>
+            {/* pétalos interiores */}
+            <path d="M 0 0 C -8 -22 -6 -48 0 -62 C 6 -48 8 -22 0 0"
+              transform="translate(80 90) rotate(-22)" fill="#F8F4EE" stroke="#525C44" strokeWidth="0.65"/>
+            <path d="M 0 0 C -8 -22 -6 -48 0 -62 C 6 -48 8 -22 0 0"
+              transform="translate(80 90) rotate(22)" fill="#F8F4EE" stroke="#525C44" strokeWidth="0.65"/>
+            <path d="M 0 0 C -8 -22 -6 -48 0 -62 C 6 -48 8 -22 0 0"
+              transform="translate(80 90) rotate(0)" fill="white" stroke="#525C44" strokeWidth="0.65"/>
+            {/* centro */}
+            <circle cx="80" cy="90" r="7.5" fill="#DDCDAE" stroke="#525C44" strokeWidth="0.65"/>
+            <circle cx="80" cy="90" r="3.2" fill="#525C44" opacity="0.28"/>
+            {/* agua */}
+            <path d="M 44 110 Q 62 105 80 110 Q 98 115 116 110" stroke="#525C44" strokeWidth="0.7" opacity="0.28"/>
+            <path d="M 38 117 Q 59 112 80 117 Q 101 122 122 117" stroke="#525C44" strokeWidth="0.5" opacity="0.16"/>
+            {/* detalles dorados */}
+            <circle cx="50" cy="69" r="1.5" fill="#CEBA6F" opacity="0.55"/>
+            <circle cx="112" cy="66" r="1.5" fill="#CEBA6F" opacity="0.45"/>
+            <circle cx="40" cy="90" r="1" fill="#525C44" opacity="0.2"/>
+            <circle cx="121" cy="84" r="1" fill="#525C44" opacity="0.2"/>
+          </svg>
+
+          <p className="font-serif text-xl font-light text-[#8a8779] italic">Sin resultados</p>
+          {search ? (
+            <>
+              <p className="text-[12px] text-[#8a8779] mt-1.5 mb-5">Intenta con otro término de búsqueda</p>
+              <button
+                onClick={() => setSearch('')}
+                className="text-[11px] uppercase tracking-widest text-green border-b border-green/30 pb-0.5 hover:opacity-70 transition-opacity"
+              >
+                Limpiar búsqueda
+              </button>
+            </>
+          ) : (
+            <p className="text-[12px] text-[#8a8779] mt-1.5">No hay productos en esta categoría aún</p>
           )}
         </div>
       )}
