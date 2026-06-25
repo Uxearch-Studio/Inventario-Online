@@ -67,7 +67,7 @@ export default function ShopPage() {
       <div className="relative mb-6">
         <Search size={15} className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-300" />
         <input
-          type="search"
+          type="text"
           placeholder="Buscar productos..."
           value={search}
           onChange={e => setSearch(e.target.value)}
