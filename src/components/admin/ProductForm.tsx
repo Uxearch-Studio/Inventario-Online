@@ -98,7 +98,7 @@ export default function ProductForm({ initial, onSubmit, submitLabel }: Props) {
       <div>
         <label className="block text-sm font-medium text-black mb-2">Precio</label>
         <div className="relative">
-          <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-sm font-medium">Q</span>
+          <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-sm font-medium">$</span>
           <input
             className={`${input} pl-8`}
             type="number"

@@ -34,7 +34,7 @@ export default function ProductCard({ product, onEdit, onStatusChange, onDelete 
           <h3 className="font-semibold text-black text-sm leading-tight truncate">{product.name}</h3>
           <ActionMenu product={product} onEdit={onEdit} onStatusChange={onStatusChange} onDelete={onDelete} />
         </div>
-        <p className="text-green font-bold text-base mt-0.5">Q {product.price.toFixed(2)}</p>
+        <p className="text-green font-bold text-base mt-0.5">$ {product.price.toLocaleString('es-CO')}</p>
         <p className="text-gray-500 text-xs mt-1 line-clamp-2">{product.description}</p>
         <div className="flex items-center gap-3 mt-2">
           <StatusBadge status={product.status} />

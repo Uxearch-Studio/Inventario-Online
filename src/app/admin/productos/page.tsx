@@ -128,7 +128,7 @@ export default function ProductosPage() {
                       </div>
                     </td>
                     <td className="px-4 py-3 font-medium text-black max-w-[140px] truncate">{p.name}</td>
-                    <td className="px-4 py-3 text-green font-semibold">Q {p.price.toFixed(2)}</td>
+                    <td className="px-4 py-3 text-green font-semibold">$ {p.price.toLocaleString('es-CO')}</td>
                     <td className="px-4 py-3 text-gray-500 max-w-[200px]">
                       <p className="truncate">{p.description}</p>
                     </td>
