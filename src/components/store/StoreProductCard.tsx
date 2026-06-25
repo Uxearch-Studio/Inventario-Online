@@ -1,34 +1,58 @@
 'use client';
 
+import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Plus, Minus } from 'lucide-react';
+import { Plus, Minus, Info, X } from 'lucide-react';
 import type { Product } from '@/types/product';
 import { useCart } from '@/context/CartContext';
 
 export default function StoreProductCard({ product }: { product: Product }) {
   const { items, addItem, updateQty } = useCart();
   const cartItem = items.find(i => i.id === product.id);
+  const [showDesc, setShowDesc] = useState(false);
 
   return (
     <div className="flex flex-col">
-      {/* imagen */}
-      <Link href={`/shop/${product.id}`} className="block relative w-full aspect-[3/4] rounded-2xl overflow-hidden bg-cream-light mb-3">
-        {product.imageUrl ? (
-          <Image
-            src={product.imageUrl}
-            alt={product.name}
-            fill
-            className="object-cover"
-          />
-        ) : (
-          <div className="w-full h-full flex items-center justify-center bg-gradient-to-b from-[#F0EBE2] to-[#E4D9CB]">
-            <span className="font-serif text-[11px] italic tracking-widest text-[#BEB4A8]">Ana Holística</span>
-          </div>
-        )}
-      </Link>
+      {/* imagen + overlay de descripción */}
+      <div className="relative w-full aspect-[3/4] rounded-2xl overflow-hidden bg-cream-light mb-3">
 
-      {/* info */}
+        {/* imagen o placeholder */}
+        <Link href={`/shop/${product.id}`} className="block w-full h-full">
+          {product.imageUrl ? (
+            <Image src={product.imageUrl} alt={product.name} fill className="object-cover" />
+          ) : (
+            <div className="w-full h-full flex items-center justify-center bg-gradient-to-b from-[#F0EBE2] to-[#E4D9CB]">
+              <span className="font-serif text-[11px] italic tracking-widest text-[#BEB4A8]">Ana Holística</span>
+            </div>
+          )}
+        </Link>
+
+        {/* overlay descripción */}
+        <div
+          className={`absolute inset-0 bg-white/92 backdrop-blur-sm flex flex-col items-center justify-center px-5 transition-opacity duration-200 ${
+            showDesc ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
+          }`}
+        >
+          <p className="font-serif text-[13px] italic font-light text-[#2c2c2c] leading-relaxed text-center line-clamp-6">
+            {product.description}
+          </p>
+        </div>
+
+        {/* botón info */}
+        <button
+          onClick={e => { e.preventDefault(); setShowDesc(v => !v); }}
+          className={`absolute bottom-2.5 right-2.5 w-7 h-7 rounded-full flex items-center justify-center transition-all duration-200 ${
+            showDesc
+              ? 'bg-[#2c2c2c] text-white'
+              : 'bg-white/80 backdrop-blur-sm text-[#888] hover:text-[#2c2c2c]'
+          }`}
+        >
+          {showDesc ? <X size={12} strokeWidth={2} /> : <Info size={12} strokeWidth={1.8} />}
+        </button>
+      </div>
+
+      {/* info texto */}
       <div className="flex flex-col gap-0.5 px-0.5">
         {product.category && (
           <span className="text-[9px] uppercase tracking-[0.2em] text-gray-300 font-medium">
@@ -42,11 +66,9 @@ export default function StoreProductCard({ product }: { product: Product }) {
           </h3>
         </Link>
 
-        <div className="flex items-center justify-between mt-1.5">
-          <span className="text-[13px] text-green font-light">
-            $ {product.price.toLocaleString('es-CO')}
-          </span>
-        </div>
+        <span className="text-[13px] text-green font-light mt-1">
+          $ {product.price.toLocaleString('es-CO')}
+        </span>
 
         {/* carrito */}
         {cartItem ? (
