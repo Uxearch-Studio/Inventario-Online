@@ -22,7 +22,7 @@ export default function SobreMiPage() {
       <div className="-mx-4 relative aspect-[4/5] sm:aspect-video overflow-hidden bg-gradient-to-br from-[#7a8c68] to-[#c0b49a]">
         {!heroError && (
           <Image
-            src="/about-hero.jpg"
+            src="/Ana.png"
             alt="Ana en su tienda"
             fill
             className="object-cover object-top"
@@ -30,8 +30,9 @@ export default function SobreMiPage() {
             onError={() => setHeroError(true)}
           />
         )}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/45 via-transparent to-transparent" />
-        <div className="absolute bottom-0 left-0 px-7 pb-8 max-w-[320px]">
+        {/* gradiente más denso abajo para tapar el texto quemado en la foto */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
+        <div className="absolute bottom-0 left-0 px-7 pb-9 max-w-[300px]">
           <p className="font-serif italic font-light text-white text-[15px] leading-relaxed">
             "Cada objeto que eliges es una intención que siembras en tu vida"
           </p>
