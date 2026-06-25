@@ -19,7 +19,7 @@ export default function SobreMiPage() {
   return (
     <div>
       {/* Hero — full bleed */}
-      <div className="-mx-4 relative aspect-[4/5] sm:aspect-video overflow-hidden bg-gradient-to-br from-[#7a8c68] to-[#c0b49a]">
+      <div className="-mx-4 -mt-6 relative aspect-[4/5] sm:aspect-video overflow-hidden bg-gradient-to-br from-[#7a8c68] to-[#c0b49a]">
         {!heroError && (
           <Image
             src="/Ana.png"
