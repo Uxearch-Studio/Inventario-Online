@@ -57,7 +57,7 @@ function StoreShell({ children }: { children: React.ReactNode }) {
       </main>
 
       {/* Mobile bottom nav */}
-      <nav className="sm:hidden fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur border-t border-cream-light z-20">
+      <nav className="sm:hidden fixed bottom-0 left-0 right-0 bg-[#525C44] z-20">
         <div className="flex h-16">
           {navItems.map(item => {
             const active = pathname === item.href || pathname.startsWith(item.href + '/');
@@ -65,13 +65,17 @@ function StoreShell({ children }: { children: React.ReactNode }) {
               <Link
                 key={item.href}
                 href={item.href}
-                className={`flex-1 relative flex flex-col items-center justify-center gap-1 transition-colors ${
-                  active ? 'text-green' : 'text-[#6e6e62]'
+                className={`flex-1 relative flex flex-col items-center justify-center gap-1 transition-all ${
+                  active ? 'text-white' : 'text-white/40'
                 }`}
               >
-                {active && <span className="absolute top-0 left-1/2 -translate-x-1/2 w-5 h-0.5 bg-green rounded-full" />}
+                {active && (
+                  <span className="absolute top-0 left-1/2 -translate-x-1/2 w-8 h-0.5 bg-white rounded-full" />
+                )}
                 <item.icon size={19} strokeWidth={active ? 2 : 1.5} />
-                <span className={`text-[10px] uppercase tracking-widest ${active ? 'font-medium' : ''}`}>{item.label}</span>
+                <span className={`text-[10px] uppercase tracking-widest ${active ? 'font-semibold' : 'font-light'}`}>
+                  {item.label}
+                </span>
               </Link>
             );
           })}
@@ -79,13 +83,17 @@ function StoreShell({ children }: { children: React.ReactNode }) {
           {/* Shop tab */}
           <Link
             href="/shop"
-            className={`flex-1 relative flex flex-col items-center justify-center gap-1 transition-colors ${
-              shopActive ? 'text-green' : 'text-[#6e6e62]'
+            className={`flex-1 relative flex flex-col items-center justify-center gap-1 transition-all ${
+              shopActive ? 'text-white' : 'text-white/40'
             }`}
           >
-            {shopActive && <span className="absolute top-0 left-1/2 -translate-x-1/2 w-5 h-0.5 bg-green rounded-full" />}
+            {shopActive && (
+              <span className="absolute top-0 left-1/2 -translate-x-1/2 w-8 h-0.5 bg-white rounded-full" />
+            )}
             <Store size={19} strokeWidth={shopActive ? 2 : 1.5} />
-            <span className={`text-[10px] uppercase tracking-widest ${shopActive ? 'font-medium' : ''}`}>Shop</span>
+            <span className={`text-[10px] uppercase tracking-widest ${shopActive ? 'font-semibold' : 'font-light'}`}>
+              Shop
+            </span>
           </Link>
         </div>
       </nav>
