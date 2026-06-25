@@ -5,6 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Plus, Minus, Info, X } from 'lucide-react';
 import type { Product } from '@/types/product';
+import { categoryIcons } from '@/lib/categoryIcons';
 import { useCart } from '@/context/CartContext';
 
 export default function StoreProductCard({ product }: { product: Product }) {
@@ -54,11 +55,10 @@ export default function StoreProductCard({ product }: { product: Product }) {
 
       {/* info texto */}
       <div className="flex flex-col gap-0.5 px-0.5">
-        {product.category && (
-          <span className="text-[10px] uppercase tracking-[0.2em] text-[#8a8779] font-medium">
-            {product.category}
-          </span>
-        )}
+        {product.category && (() => {
+          const Icon = categoryIcons[product.category!];
+          return Icon ? <Icon size={13} strokeWidth={1.5} className="text-[#8a8779] mb-0.5" /> : null;
+        })()}
 
         <Link href={`/shop/${product.id}`}>
           <h3 className="text-[14px] font-medium text-[#2c2c2c] leading-snug line-clamp-2">

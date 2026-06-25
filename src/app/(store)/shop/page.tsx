@@ -7,6 +7,7 @@ import { db } from '@/lib/firebase';
 import { mockProducts } from '@/lib/mockProducts';
 import type { Product, ProductCategory } from '@/types/product';
 import { CATEGORIES } from '@/types/product';
+import { categoryIcons, categoryShortLabels } from '@/lib/categoryIcons';
 import StoreProductCard from '@/components/store/StoreProductCard';
 
 const ALL = 'Todos';
@@ -80,21 +81,26 @@ export default function ShopPage() {
         )}
       </div>
 
-      {/* categorías — estilo texto con indicador */}
+      {/* categorías con ícono + nombre corto */}
       <div className="flex gap-0 overflow-x-auto no-scrollbar -mx-4 px-4 mb-7">
-        {([ALL, ...CATEGORIES] as Filter[]).map(cat => (
-          <button
-            key={cat}
-            onClick={() => setActiveFilter(cat)}
-            className={`flex-shrink-0 px-3 py-2 text-[11px] uppercase tracking-wider font-medium transition-all border-b-2 ${
-              activeFilter === cat
-                ? 'text-green border-green'
-                : 'text-[#6e6e62] border-transparent hover:text-[#3a3a3a]'
-            }`}
-          >
-            {cat}
-          </button>
-        ))}
+        {([ALL, ...CATEGORIES] as Filter[]).map(cat => {
+          const Icon = cat !== ALL ? categoryIcons[cat as ProductCategory] : null;
+          const label = cat !== ALL ? categoryShortLabels[cat as ProductCategory] : 'Todos';
+          return (
+            <button
+              key={cat}
+              onClick={() => setActiveFilter(cat)}
+              className={`flex-shrink-0 flex items-center gap-1.5 px-3 py-2 text-[11px] uppercase tracking-wider font-medium transition-all border-b-2 ${
+                activeFilter === cat
+                  ? 'text-green border-green'
+                  : 'text-[#6e6e62] border-transparent hover:text-[#3a3a3a]'
+              }`}
+            >
+              {Icon && <Icon size={12} strokeWidth={1.6} />}
+              {label}
+            </button>
+          );
+        })}
       </div>
 
       {/* loading */}
