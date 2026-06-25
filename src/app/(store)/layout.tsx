@@ -24,9 +24,27 @@ function StoreShell({ children }: { children: React.ReactNode }) {
       {/* Header */}
       <header className="sticky top-0 z-20 bg-white/95 backdrop-blur-md border-b border-cream-light">
         <div className="max-w-2xl mx-auto px-5 h-14 flex items-center justify-between">
-          <Link href="/shop" className="flex items-baseline gap-2">
-            <span className="font-serif text-2xl font-light italic tracking-wide text-green">Ana</span>
-            <span className="font-serif text-2xl font-[300] tracking-widest text-[#3a3a3a]">Holística</span>
+          <Link href="/shop" className="flex items-center gap-2.5">
+            {/* pluma SVG reconstruida del logo */}
+            <svg viewBox="0 0 50 62" className="h-10 w-auto flex-shrink-0" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M10 5 C16 3 30 6 38 14 C44 20 46 30 42 42 C40 50 38 56 40 58 C36 52 26 40 18 30 C12 22 8 14 10 5 Z" fill="#3d4a2f"/>
+              <path d="M10 5 C16 18 26 38 40 58" stroke="#607050" strokeWidth="1.1" fill="none"/>
+              <path d="M12 11 C17 9 24 9 29 11" stroke="#607050" strokeWidth="0.55" fill="none"/>
+              <path d="M14 18 C20 15 28 14 33 16" stroke="#607050" strokeWidth="0.55" fill="none"/>
+              <path d="M17 24 C23 21 31 20 36 22" stroke="#607050" strokeWidth="0.55" fill="none"/>
+              <path d="M20 31 C25 28 32 27 37 30" stroke="#607050" strokeWidth="0.55" fill="none"/>
+              <path d="M23 38 C27 35 33 35 37 38" stroke="#607050" strokeWidth="0.55" fill="none"/>
+              <path d="M27 44 C30 43 34 42 37 45" stroke="#607050" strokeWidth="0.55" fill="none"/>
+              <path d="M12 11 C11 14 10 16 9 18" stroke="#607050" strokeWidth="0.45" fill="none"/>
+              <path d="M14 18 C13 21 12 23 11 25" stroke="#607050" strokeWidth="0.45" fill="none"/>
+              <path d="M17 24 C16 27 15 29 14 31" stroke="#607050" strokeWidth="0.45" fill="none"/>
+              <path d="M20 31 C19 34 18 36 18 38" stroke="#607050" strokeWidth="0.45" fill="none"/>
+              <path d="M23 38 C22 41 22 43 22 45" stroke="#607050" strokeWidth="0.45" fill="none"/>
+            </svg>
+            <div className="flex flex-col">
+              <span className="font-serif text-[22px] font-[500] leading-none text-[#3d4a2f]">ana</span>
+              <span className="text-[8px] tracking-[0.22em] text-[#3d4a2f]/60 font-light mt-0.5">Awaken your magic</span>
+            </div>
           </Link>
 
           <div className="flex items-center gap-2">
