@@ -2,15 +2,15 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { User, Flame, Star, ShoppingBag } from 'lucide-react';
+import { Feather, Flower2, Sparkles, Leaf, ShoppingBag } from 'lucide-react';
 import { CartProvider, useCart } from '@/context/CartContext';
 import CartButton from '@/components/store/CartButton';
 import CartDrawer from '@/components/store/CartDrawer';
 
 const navItems = [
-  { href: '/sobre-mi', label: 'Sobre Mí', icon: User },
-  { href: '/yoga', label: 'Yoga', icon: Flame },
-  { href: '/coaching', label: 'Coaching', icon: Star },
+  { href: '/sobre-mi', label: 'Sobre Mí', icon: Feather },
+  { href: '/yoga', label: 'Yoga', icon: Flower2 },
+  { href: '/coaching', label: 'Coaching', icon: Sparkles },
 ];
 
 function StoreShell({ children }: { children: React.ReactNode }) {
@@ -83,7 +83,7 @@ function StoreShell({ children }: { children: React.ReactNode }) {
             }`}
           >
             <div className="relative">
-              <ShoppingBag size={19} strokeWidth={1.5} />
+              <Leaf size={19} strokeWidth={1.5} />
               <span className={`absolute -top-2 -right-2.5 min-w-[16px] h-4 px-0.5 rounded-full flex items-center justify-center text-[9px] font-semibold leading-none transition-colors ${
                 totalItems > 0 ? 'bg-gold text-white' : 'bg-gray-200 text-gray-400'
               }`}>
